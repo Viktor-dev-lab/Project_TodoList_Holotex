@@ -1,0 +1,45 @@
+/* Container */
+.container {
+  background-color: #bfc6d3;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.title {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Input */
+.task-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* Todo list */
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Todo item */
+.todo-item {
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todo-text {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
