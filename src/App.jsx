@@ -1,12 +1,13 @@
 import "./App.css";
 import TodoItem from "./components/TodoItem";
+import { useState } from "react";
 
 function App() {
-  const todoItem = [
-    {id: 1, name:"Studying"},
-    {id: 2, name:"Go to gym"},
-    {id: 3, name:"Read the book"},
-  ];
+  const [todoItem, setTodoItem] = useState([
+    { id: 1, name: "Studying" },
+    { id: 2, name: "Go to gym" },
+    { id: 3, name: "Read the book" },
+  ]);
 
   const todoList = todoItem.map((value, index) => {
     return <TodoItem key={value.id} name={`${index + 1}. ${value.name}`} />
@@ -20,6 +21,18 @@ function App() {
         type="text"
         name="add-new-task"
         placeholder="Add new task"
+        onKeyDown={(e) => {
+          if (e.key == "Enter"){
+            const value = e.target.value.trim();
+            if (value) {
+              setTodoItem([
+                ...todoItem,
+                { id: crypto.randomUUID(), name: value }
+              ]);
+              e.target.value = ""; 
+            }
+          }
+        }}
       />
       <div className="todo-list">
         {todoList}
