@@ -6,11 +6,21 @@ import { motion } from "framer-motion";
 
 function App() {
   const [todoItem, setTodoItem] = useState([
-    { id: 1, name: "Studying", isImportant: false },
-    { id: 2, name: "Go to gym", isImportant: true },
-    { id: 3, name: "Read the book", isImportant: true },
+    { id: 1, name: "Studying", isImportant: false, isCompleted: false },
+    { id: 2, name: "Go to gym", isImportant: true , isCompleted: true},
+    { id: 3, name: "Read the book", isImportant: true,  isCompleted: false },
   ]);
   const [newItemId, setNewItemId] = useState(null);
+
+  const handleCompleteCheckboxChange = (todoID) => {
+    const newtodoItem = todoItem.map(todo => {
+      if (todo.id == todoID){
+        return {...todo, isCompleted: !todo.isCompleted};
+      }
+      return todo;
+    })
+    setTodoItem(newtodoItem);
+  };
 
   const todoList = todoItem.map((value, index) => {
     const isNewItem = value.id === newItemId;
@@ -24,7 +34,13 @@ function App() {
           if (isNewItem) setNewItemId(null); 
         }}
       >
-        <TodoItem name={`${index + 1}. ${value.name}`} isImportant={value.isImportant} />
+        <TodoItem 
+          id={value.id}
+          name={`${index + 1}. ${value.name}`} 
+          isImportant={value.isImportant} 
+          isCompleted={value.isCompleted} 
+          handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+        />
       </motion.div>
     );
   });
@@ -44,7 +60,7 @@ function App() {
               const newId = crypto.randomUUID();
               setTodoItem([
                 ...todoItem,
-                { id: newId, name: value },
+                { id: newId, name: value, isImportant: false, isCompleted: false },
               ]);
               setNewItemId(newId);
               e.target.value = "";
@@ -53,6 +69,7 @@ function App() {
         }}
       />
       <div className="todo-list">{todoList}</div>
+      
     </div>
   );
 }
