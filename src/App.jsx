@@ -1,26 +1,47 @@
 import "./App.css";
 import TodoItem from "./components/TodoItem";
+import Sidebar from "./components/Sidebar";
 import { useState } from "react";
 /* eslint-disable no-unused-vars */
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
   const [todoItem, setTodoItem] = useState([
     { id: 1, name: "Studying", isImportant: false, isCompleted: false },
-    { id: 2, name: "Go to gym", isImportant: true , isCompleted: true},
-    { id: 3, name: "Read the book", isImportant: true,  isCompleted: false },
+    { id: 2, name: "Go to gym", isImportant: true, isCompleted: true },
+    { id: 3, name: "Read the book", isImportant: true, isCompleted: false },
   ]);
   const [newItemId, setNewItemId] = useState(null);
+  const [openSidebar, setOpenSidebar] = useState(false);
+  const [activeTodoID, setActiveTodoID] = useState(null);
 
   const handleCompleteCheckboxChange = (todoID) => {
-    const newtodoItem = todoItem.map(todo => {
-      if (todo.id == todoID){
-        return {...todo, isCompleted: !todo.isCompleted};
+    const newtodoItem = todoItem.map((todo) => {
+      if (todo.id == todoID) {
+        return { ...todo, isCompleted: !todo.isCompleted };
       }
       return todo;
-    })
+    });
     setTodoItem(newtodoItem);
   };
+
+  const getTodo = todoItem.find((todo) => todo.id == activeTodoID);
+
+  const handleOpenSidebar = (todoID) => {
+    setOpenSidebar(true);
+    setActiveTodoID(todoID);
+  };
+
+  const handelChangeFieldTodo = (updatedTodo) => {
+  const newTodoItem = todoItem.map(todo => {
+    if (todo.id === updatedTodo.id) {
+      return updatedTodo; 
+    }
+    return todo; 
+  });
+  setTodoItem(newTodoItem);
+};
+
 
   const todoList = todoItem.map((value, index) => {
     const isNewItem = value.id === newItemId;
@@ -31,15 +52,16 @@ function App() {
         animate={isNewItem ? { opacity: 1, x: [0, -5, 5, -5, 5, 0] } : false}
         transition={isNewItem ? { duration: 0.5 } : {}}
         onAnimationComplete={() => {
-          if (isNewItem) setNewItemId(null); 
+          if (isNewItem) setNewItemId(null);
         }}
       >
-        <TodoItem 
+        <TodoItem
           id={value.id}
-          name={`${index + 1}. ${value.name}`} 
-          isImportant={value.isImportant} 
-          isCompleted={value.isCompleted} 
+          name={`${index + 1}. ${value.name}`}
+          isImportant={value.isImportant}
+          isCompleted={value.isCompleted}
           handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+          handleOpenSidebar={handleOpenSidebar}
         />
       </motion.div>
     );
@@ -60,7 +82,12 @@ function App() {
               const newId = crypto.randomUUID();
               setTodoItem([
                 ...todoItem,
-                { id: newId, name: value, isImportant: false, isCompleted: false },
+                {
+                  id: newId,
+                  name: value,
+                  isImportant: false,
+                  isCompleted: false,
+                },
               ]);
               setNewItemId(newId);
               e.target.value = "";
@@ -69,7 +96,16 @@ function App() {
         }}
       />
       <div className="todo-list">{todoList}</div>
-      
+      <AnimatePresence>
+        {openSidebar && (
+          <Sidebar
+            key={activeTodoID}
+            todoItem={getTodo}
+            hadnleCloseSidebar={() => setOpenSidebar(false)}
+            handelChangeFieldTodo={handelChangeFieldTodo}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

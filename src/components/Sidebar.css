@@ -1,0 +1,90 @@
+.sb-Sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 22vw;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid #e0e0e0;
+  box-shadow: -2px 0 10px rgba(56, 54, 54, 0.08);
+  font-family: sans-serif;
+}
+
+.sb-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sb-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.sb-form input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.sb-form input[type="text"]:focus {
+  border-color: #4caf50;
+}
+
+.sb-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sb-field input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-left: 10px;
+}
+
+.sb-action {
+  border-top: 3px solid #e0e0e0;
+  padding: 12px 20px;
+  display: flex;
+  gap: 10px;
+  background-color: #fafafa;
+}
+
+.sb-button {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.sb-button:first-child {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.sb-button:first-child:hover {
+  background-color: #43a047;
+}
+
+.sb-button:last-child {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.sb-button:last-child:hover {
+  background-color: #e53935;
+}
