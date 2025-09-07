@@ -6,6 +6,7 @@ const TodoItem = (props) => {
       alert(props.name);
     }}>
       <p className="todo-text">{props.name}</p>
+      {props.isImportant && <p className="important-text">Important</p>}
     </div>
   );
 };

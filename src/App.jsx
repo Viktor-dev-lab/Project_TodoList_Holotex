@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 
 function App() {
   const [todoItem, setTodoItem] = useState([
-    { id: 1, name: "Studying" },
-    { id: 2, name: "Go to gym" },
-    { id: 3, name: "Read the book" },
+    { id: 1, name: "Studying", isImportant: false },
+    { id: 2, name: "Go to gym", isImportant: true },
+    { id: 3, name: "Read the book", isImportant: true },
   ]);
   const [newItemId, setNewItemId] = useState(null);
 
@@ -24,7 +24,7 @@ function App() {
           if (isNewItem) setNewItemId(null); 
         }}
       >
-        <TodoItem name={`${index + 1}. ${value.name}`} />
+        <TodoItem name={`${index + 1}. ${value.name}`} isImportant={value.isImportant} />
       </motion.div>
     );
   });
