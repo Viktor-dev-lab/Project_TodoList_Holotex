@@ -10,6 +10,7 @@ const TodoItem = (props) => {
           onChange={() => {
             props.handleCompleteCheckboxChange(props.id)
           }} 
+          onClick={(e) => {e.stopPropagation()}}
           style={{ marginRight: '3px' }} 
         />
         <p className="todo-text">{props.name}</p>

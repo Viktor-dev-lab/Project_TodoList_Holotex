@@ -1,6 +1,6 @@
 /* Container */
-.container {
-  background-color: #bfc6d3;
+.main-container {
+  background-color: #eceff5;
   min-height: 100vh;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -54,4 +54,17 @@
   padding: 2px 6px;
   border-radius: 6px;
   display: inline-block;
+}
+
+
+.container{
+  display: flex;
+}
+
+.main-container{
+  flex: 2;
+}
+
+.filter-pannel{
+  flex: 1;
 }

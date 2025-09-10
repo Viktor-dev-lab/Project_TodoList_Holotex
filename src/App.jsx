@@ -1,6 +1,7 @@
 import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
+import FilterPannel from "./components/FilterPannel";
 import { useState } from "react";
 /* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
@@ -33,15 +34,14 @@ function App() {
   };
 
   const handelChangeFieldTodo = (updatedTodo) => {
-  const newTodoItem = todoItem.map(todo => {
-    if (todo.id === updatedTodo.id) {
-      return updatedTodo; 
-    }
-    return todo; 
-  });
-  setTodoItem(newTodoItem);
-};
-
+    const newTodoItem = todoItem.map((todo) => {
+      if (todo.id === updatedTodo.id) {
+        return updatedTodo;
+      }
+      return todo;
+    });
+    setTodoItem(newTodoItem);
+  };
 
   const todoList = todoItem.map((value, index) => {
     const isNewItem = value.id === newItemId;
@@ -69,43 +69,45 @@ function App() {
 
   return (
     <div className="container">
-      <h1 className="title">My Todo List</h1>
-      <input
-        className="task-input"
-        type="text"
-        name="add-new-task"
-        placeholder="Add new task"
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            const value = e.target.value.trim();
-            if (value) {
-              const newId = crypto.randomUUID();
-              setTodoItem([
-                ...todoItem,
-                {
-                  id: newId,
-                  name: value,
-                  isImportant: false,
-                  isCompleted: false,
-                },
-              ]);
-              setNewItemId(newId);
-              e.target.value = "";
+      <FilterPannel/>
+      <div className="main-container">
+        <input
+          className="task-input"
+          type="text"
+          name="add-new-task"
+          placeholder="Add new task"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              const value = e.target.value.trim();
+              if (value) {
+                const newId = crypto.randomUUID();
+                setTodoItem([
+                  ...todoItem,
+                  {
+                    id: newId,
+                    name: value,
+                    isImportant: false,
+                    isCompleted: false,
+                  },
+                ]);
+                setNewItemId(newId);
+                e.target.value = "";
+              }
             }
-          }
-        }}
-      />
-      <div className="todo-list">{todoList}</div>
-      <AnimatePresence>
-        {openSidebar && (
-          <Sidebar
-            key={activeTodoID}
-            todoItem={getTodo}
-            hadnleCloseSidebar={() => setOpenSidebar(false)}
-            handelChangeFieldTodo={handelChangeFieldTodo}
-          />
-        )}
-      </AnimatePresence>
+          }}
+        />
+        <div className="todo-list">{todoList}</div>
+        <AnimatePresence>
+          {openSidebar && (
+            <Sidebar
+              key={activeTodoID}
+              todoItem={getTodo}
+              hadnleCloseSidebar={() => setOpenSidebar(false)}
+              handelChangeFieldTodo={handelChangeFieldTodo}
+            />
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
