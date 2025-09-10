@@ -1,5 +1,4 @@
 import "./FilterPannel.css";
-import {useState} from 'react'
 
 const FILTER_ITEMS = [
   {
