@@ -28,3 +28,17 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
 }
+
+.filter-item.selected {
+  background: linear-gradient(135deg, #166fa3, #4a7ede); /* xanh lá gradient */
+  color: #fff; /* chữ trắng */
+  border: 1px solid #162ba3;
+  box-shadow: 0 4px 12px rgba(22, 60, 163, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.filter-item.selected:hover {
+  box-shadow: 0 6px 16px rgba(22, 67, 163, 0.4);
+  transform: translateY(-4px);
+}
