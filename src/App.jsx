@@ -12,6 +12,7 @@ function App() {
     { id: 2, name: "Go to gym", isImportant: true, isCompleted: true },
     { id: 3, name: "Read the book", isImportant: true, isCompleted: false },
   ]);
+  const [selectFilter, setSelectFilter] = useState("all");
   const [newItemId, setNewItemId] = useState(null);
   const [openSidebar, setOpenSidebar] = useState(false);
   const [activeTodoID, setActiveTodoID] = useState(null);
@@ -69,7 +70,7 @@ function App() {
 
   return (
     <div className="container">
-      <FilterPannel/>
+      <FilterPannel selectFilter={selectFilter} setSelectFilter={setSelectFilter}/>
       <div className="main-container">
         <input
           className="task-input"

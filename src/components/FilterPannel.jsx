@@ -5,36 +5,34 @@ const FILTER_ITEMS = [
   {
     id: "all",
     label: "All",
-    iconPath: "./public/inbox.png",
+    iconPath: "/inbox.png",
   },
   {
     id: "important",
     label: "Important",
-    iconPath: "./public/flag.png",
+    iconPath: "/flag.png",
   },
   {
     id: "completed",
     label: "Completed",
-    iconPath: "./public/check.png",
+    iconPath: "/check.png",
   },
   {
     id: "deleted",
     label: "Deleted",
-    iconPath: "./public/delete.png",
+    iconPath: "/delete.png",
   },
 ];
 
-const FilterPannel = () => {
-  const [selectFilter, setSelectFilter] = useState("all");
-
+const FilterPannel = (props) => {
   return (
     <div className="filter-pannel">
       <input type="text" name="search-text" placeholder="Search"></input>
       <div className="filter-container">
         {FILTER_ITEMS.map((item) => {
           return (
-            <div className={`filter-item ${item.id === selectFilter ? 'selected' : ''}`}
-              onClick={() => setSelectFilter(item.id)}
+            <div className={`filter-item ${item.id === props.selectFilter ? 'selected' : ''}`}
+              onClick={() => props.setSelectFilter(item.id)}
             >
               <div className="filter-name">
                 <img src={item.iconPath} />
