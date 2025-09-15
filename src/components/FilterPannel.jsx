@@ -1,4 +1,5 @@
 import "./FilterPannel.css";
+import { useMemo } from "react";
 
 const FILTER_ITEMS = [
   {
@@ -24,7 +25,9 @@ const FILTER_ITEMS = [
 ];
 
 const FilterPannel = (props) => {
-  const countFilterType = props.todolist.reduce((acc, todo) => {
+  
+  const countFilterType = useMemo(() => {
+    props.todolist.reduce((acc, todo) => {
     if (todo.isDeleted) {
       acc.deleted += 1;
     } if (todo.isCompleted) {
@@ -34,6 +37,7 @@ const FilterPannel = (props) => {
     } 
     return acc;
   }, { all: props.todolist.length, important: 0, completed: 0, deleted: 0 });
+  },[props.todolist]);
 
   return (
     <div className="filter-pannel">

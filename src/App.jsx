@@ -2,7 +2,7 @@ import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
 import FilterPannel from "./components/FilterPannel";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 /* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -62,8 +62,8 @@ function App() {
     setTodoItem(newTodoItem);
   };
 
-  const FiltertodoList = todoItem
-    .filter((todo) => {
+  const FiltertodoList = useMemo(() => {
+    todoItem.filter((todo) => {
       switch (selectFilter) {
         case "all":
           return true;
@@ -76,30 +76,8 @@ function App() {
         default:
           return true;
       }
-    })
-    .map((todo, index) => {
-      const isNewItem = todo.id === newItemId;
-      return (
-        <motion.div
-          key={todo.id}
-          initial={isNewItem ? { opacity: 0, x: -10 } : false}
-          animate={isNewItem ? { opacity: 1, x: [0, -5, 5, -5, 5, 0] } : false}
-          transition={isNewItem ? { duration: 0.5 } : {}}
-          onAnimationComplete={() => {
-            if (isNewItem) setNewItemId(null);
-          }}
-        >
-          <TodoItem
-            id={todo.id}
-            name={`${index + 1}. ${todo.name}`}
-            isImportant={todo.isImportant}
-            isCompleted={todo.isCompleted}
-            handleCompleteCheckboxChange={handleCompleteCheckboxChange}
-            handleOpenSidebar={handleOpenSidebar}
-          />
-        </motion.div>
-      );
     });
+  }, [todoItem, selectFilter]);
 
   return (
     <div className="container">
@@ -135,7 +113,33 @@ function App() {
             }
           }}
         />
-        <div className="todo-list">{FiltertodoList}</div>
+        <div className="todo-list">
+          {FiltertodoList.map((todo, index) => {
+            const isNewItem = todo.id === newItemId;
+            return (
+              <motion.div
+                key={todo.id}
+                initial={isNewItem ? { opacity: 0, x: -10 } : false}
+                animate={
+                  isNewItem ? { opacity: 1, x: [0, -5, 5, -5, 5, 0] } : false
+                }
+                transition={isNewItem ? { duration: 0.5 } : {}}
+                onAnimationComplete={() => {
+                  if (isNewItem) setNewItemId(null);
+                }}
+              >
+                <TodoItem
+                  id={todo.id}
+                  name={`${index + 1}. ${todo.name}`}
+                  isImportant={todo.isImportant}
+                  isCompleted={todo.isCompleted}
+                  handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+                  handleOpenSidebar={handleOpenSidebar}
+                />
+              </motion.div>
+            );
+          })}
+        </div>
         <AnimatePresence>
           {openSidebar && (
             <Sidebar
