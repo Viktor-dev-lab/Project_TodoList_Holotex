@@ -30,7 +30,9 @@ const FilterPannel = (props) => {
       <div className="filter-container">
         {FILTER_ITEMS.map((item) => {
           return (
-            <div className={`filter-item ${item.id === props.selectFilter ? 'selected' : ''}`}
+            <div
+              key={item.id}
+              className={`filter-item ${ item.id === props.selectFilter ? "selected" : ""}`}
               onClick={() => props.setSelectFilter(item.id)}
             >
               <div className="filter-name">
