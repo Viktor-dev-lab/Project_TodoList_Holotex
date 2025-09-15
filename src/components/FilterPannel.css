@@ -1,0 +1,44 @@
+.filter-pannel {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.filter-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eceff5;
+  padding: 16px 20px;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.filter-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.filter-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.filter-item.selected {
+  background: linear-gradient(135deg, #166fa3, #4a7ede); /* xanh lá gradient */
+  color: #fff; /* chữ trắng */
+  border: 1px solid #162ba3;
+  box-shadow: 0 4px 12px rgba(22, 60, 163, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.filter-item.selected:hover {
+  box-shadow: 0 6px 16px rgba(22, 67, 163, 0.4);
+  transform: translateY(-4px);
+}
