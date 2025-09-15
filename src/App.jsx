@@ -8,9 +8,27 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function App() {
   const [todoItem, setTodoItem] = useState([
-    { id: 1, name: "Studying", isImportant: false, isCompleted: false, isDeleted: false },
-    { id: 2, name: "Go to gym", isImportant: true, isCompleted: true, isDeleted: false },
-    { id: 3, name: "Read the book", isImportant: true, isCompleted: false, isDeleted: false },
+    {
+      id: 1,
+      name: "Studying",
+      isImportant: false,
+      isCompleted: false,
+      isDeleted: false,
+    },
+    {
+      id: 2,
+      name: "Go to gym",
+      isImportant: true,
+      isCompleted: true,
+      isDeleted: false,
+    },
+    {
+      id: 3,
+      name: "Read the book",
+      isImportant: true,
+      isCompleted: false,
+      isDeleted: false,
+    },
   ]);
   const [selectFilter, setSelectFilter] = useState("all");
   const [newItemId, setNewItemId] = useState(null);
@@ -44,46 +62,52 @@ function App() {
     setTodoItem(newTodoItem);
   };
 
-  const FiltertodoList = todoItem.filter((todo) => {
-    switch(selectFilter){
-      case "all":
-        return true;
-      case "completed":
-        return todo.isCompleted;
-      case "important":
-        return todo.isImportant;
-      case "deleted":
-        return todo.isDeleted;
-      default:
-        return true;
-    }
-  }).map((todo, index) => {
-    const isNewItem = todo.id === newItemId;
-    return (
-      <motion.div
-        key={todo.id}
-        initial={isNewItem ? { opacity: 0, x: -10 } : false}
-        animate={isNewItem ? { opacity: 1, x: [0, -5, 5, -5, 5, 0] } : false}
-        transition={isNewItem ? { duration: 0.5 } : {}}
-        onAnimationComplete={() => {
-          if (isNewItem) setNewItemId(null);
-        }}
-      >
-        <TodoItem
-          id={todo.id}
-          name={`${index + 1}. ${todo.name}`}
-          isImportant={todo.isImportant}
-          isCompleted={todo.isCompleted}
-          handleCompleteCheckboxChange={handleCompleteCheckboxChange}
-          handleOpenSidebar={handleOpenSidebar}
-        />
-      </motion.div>
-    );
-  });
+  const FiltertodoList = todoItem
+    .filter((todo) => {
+      switch (selectFilter) {
+        case "all":
+          return true;
+        case "completed":
+          return todo.isCompleted;
+        case "important":
+          return todo.isImportant;
+        case "deleted":
+          return todo.isDeleted;
+        default:
+          return true;
+      }
+    })
+    .map((todo, index) => {
+      const isNewItem = todo.id === newItemId;
+      return (
+        <motion.div
+          key={todo.id}
+          initial={isNewItem ? { opacity: 0, x: -10 } : false}
+          animate={isNewItem ? { opacity: 1, x: [0, -5, 5, -5, 5, 0] } : false}
+          transition={isNewItem ? { duration: 0.5 } : {}}
+          onAnimationComplete={() => {
+            if (isNewItem) setNewItemId(null);
+          }}
+        >
+          <TodoItem
+            id={todo.id}
+            name={`${index + 1}. ${todo.name}`}
+            isImportant={todo.isImportant}
+            isCompleted={todo.isCompleted}
+            handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+            handleOpenSidebar={handleOpenSidebar}
+          />
+        </motion.div>
+      );
+    });
 
   return (
     <div className="container">
-      <FilterPannel selectFilter={selectFilter} setSelectFilter={setSelectFilter}/>
+      <FilterPannel
+        selectFilter={selectFilter}
+        setSelectFilter={setSelectFilter}
+        todolist={todoItem}
+      />
       <div className="main-container">
         <input
           className="task-input"

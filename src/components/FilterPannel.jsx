@@ -24,6 +24,17 @@ const FILTER_ITEMS = [
 ];
 
 const FilterPannel = (props) => {
+  const countFilterType = props.todolist.reduce((acc, todo) => {
+    if (todo.isDeleted) {
+      acc.deleted += 1;
+    } if (todo.isCompleted) {
+      acc.completed += 1;
+    } if (todo.isImportant) {
+      acc.important += 1;
+    } 
+    return acc;
+  }, { all: props.todolist.length, important: 0, completed: 0, deleted: 0 });
+
   return (
     <div className="filter-pannel">
       <input type="text" name="search-text" placeholder="Search"></input>
@@ -39,7 +50,7 @@ const FilterPannel = (props) => {
                 <img src={item.iconPath} />
                 <p>{item.label}</p>
               </div>
-              <p>22</p>
+              <p>{countFilterType[item.id]}</p>
             </div>
           );
         })}
