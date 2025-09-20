@@ -16,7 +16,7 @@ const FilterPannel = (props) => {
         onChange={(e) => props.setSearchText(e.target.value)}
       />
       <FilterList {...props} />
-      <CategoryList />
+      <CategoryList todoList={props.todolist} />
     </div>
   );
 };

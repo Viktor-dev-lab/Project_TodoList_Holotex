@@ -1,90 +1,322 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 .sb-Sidebar {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 22vw;
-  background-color: #fff;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-left: 1px solid #e0e0e0;
-  box-shadow: -2px 0 10px rgba(56, 54, 54, 0.08);
-  font-family: sans-serif;
+  border-left: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 
+    -8px 0 24px rgba(0, 0, 0, 0.06),
+    -4px 0 12px rgba(0, 0, 0, 0.04);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 8px;
 }
 
+.sb-Sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(59, 130, 246, 0.02) 0%, 
+    rgba(147, 51, 234, 0.02) 50%, 
+    rgba(16, 185, 129, 0.02) 100%);
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+/* Form Container */
 .sb-form {
-  padding: 20px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  flex: 1;
+  overflow-y: auto;
 }
 
-.sb-form label {
+.sb-form::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sb-form::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sb-form::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 2px;
+}
+
+.sb-form::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Text Input Field */
+.sb-form > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sb-form > div:first-child label {
   display: block;
-  font-size: 14px;
+  font-size: 0.75rem;
   font-weight: 500;
-  margin-bottom: 6px;
-  color: #333;
+  color: #475569;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.sb-form input[type="text"] {
+.sb-form > div:first-child input[type="text"] {
   width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  padding: 12px 16px;
+  border: 2px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.8);
+  color: #1e293b;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
   outline: none;
-  transition: border-color 0.2s ease;
 }
 
-.sb-form input[type="text"]:focus {
-  border-color: #4caf50;
+.sb-form > div:first-child input[type="text"]::placeholder {
+  color: #94a3b8;
 }
 
+.sb-form > div:first-child input[type="text"]:focus {
+  border-color: #3b82f6;
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Checkbox Fields */
 .sb-field {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.sb-field:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateX(-2px);
 }
 
 .sb-field input[type="checkbox"] {
-  transform: scale(1.2);
-  margin-left: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: #3b82f6;
+  cursor: pointer;
+  transform: scale(1);
+  margin: 0;
+  flex-shrink: 0;
 }
 
-.sb-action {
-  border-top: 3px solid #e0e0e0;
-  padding: 12px 20px;
+.sb-field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1e293b;
+  margin: 0;
+  cursor: pointer;
+  flex: 1;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: color 0.2s ease;
+}
+
+.sb-field:hover label {
+  color: #3b82f6;
+}
+
+/* Dropdown Field */
+.sb-dropdown {
+  position: relative;
   display: flex;
-  gap: 10px;
-  background-color: #fafafa;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sb-dropdown label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.sb-dropdown select {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 2px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.8) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  color: #1e293b;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.sb-dropdown select option {
+  background: #ffffff;
+  color: #1e293b;
+  padding: 8px;
+}
+
+/* Action Buttons */
+.sb-action {
+  padding: 24px;
+  display: flex;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 16px 16px;
 }
 
 .sb-button {
   flex: 1;
-  padding: 10px 0;
+  padding: 14px 20px;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
+  font-size: 0.875rem;
   font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: none;
+  letter-spacing: -0.025em;
+  position: relative;
+  overflow: hidden;
+}
+
+.sb-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.sb-button:hover::before {
+  left: 100%;
 }
 
 .sb-button:first-child {
-  background-color: #4caf50;
-  color: #fff;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
 }
 
 .sb-button:first-child:hover {
-  background-color: #43a047;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
 }
 
 .sb-button:last-child {
-  background-color: #f44336;
-  color: #fff;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
 }
 
 .sb-button:last-child:hover {
-  background-color: #e53935;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sb-Sidebar {
+    width: 100vw;
+    max-width: 400px;
+  }
+  
+  .sb-form {
+    padding: 20px;
+  }
+  
+  .sb-action {
+    padding: 20px;
+  }
+}
+
+/* Focus states for accessibility */
+.sb-form input:focus,
+.sb-dropdown select:focus,
+.sb-button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Loading state */
+.sb-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.sb-button:disabled::before {
+  display: none;
+}
+
+/* Animation enhancements */
+.sb-field input[type="checkbox"]:checked {
+  animation: checkPulse 0.3s ease;
+}
+
+@keyframes checkPulse {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Subtle entrance animation for form fields */
+.sb-form > div {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideIn 0.6s ease forwards;
+}
+
+.sb-form > div:nth-child(1) { animation-delay: 0.1s; }
+.sb-form > div:nth-child(2) { animation-delay: 0.2s; }
+.sb-form > div:nth-child(3) { animation-delay: 0.3s; }
+.sb-form > div:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
