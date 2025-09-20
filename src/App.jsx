@@ -14,6 +14,7 @@ function App() {
       isImportant: false,
       isCompleted: false,
       isDeleted: false,
+      category: "study",
     },
     {
       id: 2,
@@ -21,6 +22,7 @@ function App() {
       isImportant: true,
       isCompleted: true,
       isDeleted: false,
+      category: "work",
     },
     {
       id: 3,
@@ -28,6 +30,7 @@ function App() {
       isImportant: true,
       isCompleted: false,
       isDeleted: false,
+      category: "personal",
     },
   ]);
   const [selectFilter, setSelectFilter] = useState("all");
@@ -112,6 +115,7 @@ function App() {
                     isImportant: false,
                     isCompleted: false,
                     isDeleted: false,
+                    category: "study",
                   },
                 ]);
                 setNewItemId(newId);
@@ -152,7 +156,7 @@ function App() {
             <Sidebar
               key={activeTodoID}
               todoItem={getTodo}
-              hadnleCloseSidebar={() => setOpenSidebar(false)}
+              handleCloseSidebar={() => setOpenSidebar(false)}
               handelChangeFieldTodo={handelChangeFieldTodo}
             />
           )}

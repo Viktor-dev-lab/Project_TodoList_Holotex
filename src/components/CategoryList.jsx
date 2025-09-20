@@ -1,23 +1,5 @@
 import React from "react";
-
-const CATEGORY_ITEMS = [
-  {
-    id: "work",
-    label: "Work",
-  },
-  {
-    id: "personal",
-    label: "Personal",
-  },
-  {
-    id: "shopping",
-    label: "Shopping",
-  },
-  {
-    id: "other",
-    label: "Other",
-  },
-];
+import {CATEGORY_ITEMS} from "../constants";
 
 const CategoryList = () => {
   return (
