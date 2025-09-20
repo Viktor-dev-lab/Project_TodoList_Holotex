@@ -5,6 +5,7 @@
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .category-count{
@@ -23,5 +24,9 @@
 
 .category-name{
   font-weight: bold;
+}
+
+.category-item.active{
+  background-color: #e0e0e0;
 }
 
