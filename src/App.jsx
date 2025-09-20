@@ -2,69 +2,31 @@ import "./App.css";
 import TodoItem from "./components/TodoItem";
 import Sidebar from "./components/Sidebar";
 import FilterPannel from "./components/FilterPannel";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 /* eslint-disable no-unused-vars */
 import { motion, AnimatePresence } from "framer-motion";
+import { useContext } from "react";
+import { Appcontext } from "./context/AppProvider";
 
 function App() {
-  const [todoItem, setTodoItem] = useState([
-    {
-      id: 1,
-      name: "Studying",
-      isImportant: false,
-      isCompleted: false,
-      isDeleted: false,
-      category: "study",
-    },
-    {
-      id: 2,
-      name: "Go to gym",
-      isImportant: true,
-      isCompleted: true,
-      isDeleted: false,
-      category: "work",
-    },
-    {
-      id: 3,
-      name: "Read the book",
-      isImportant: true,
-      isCompleted: false,
-      isDeleted: false,
-      category: "personal",
-    },
-  ]);
-  const [selectFilter, setSelectFilter] = useState("all");
-  const [newItemId, setNewItemId] = useState(null);
-  const [openSidebar, setOpenSidebar] = useState(false);
-  const [activeTodoID, setActiveTodoID] = useState(null);
-  const [searchText, setSearchText] = useState("");
-
-  const handleCompleteCheckboxChange = (todoID) => {
-    const newtodoItem = todoItem.map((todo) => {
-      if (todo.id == todoID) {
-        return { ...todo, isCompleted: !todo.isCompleted };
-      }
-      return todo;
-    });
-    setTodoItem(newtodoItem);
-  };
-
-  const getTodo = todoItem.find((todo) => todo.id == activeTodoID);
-
-  const handleOpenSidebar = (todoID) => {
-    setOpenSidebar(true);
-    setActiveTodoID(todoID);
-  };
-
-  const handelChangeFieldTodo = (updatedTodo) => {
-    const newTodoItem = todoItem.map((todo) => {
-      if (todo.id === updatedTodo.id) {
-        return updatedTodo;
-      }
-      return todo;
-    });
-    setTodoItem(newTodoItem);
-  };
+  const {
+    todoItem,
+    setTodoItem,
+    selectFilter,
+    setSelectFilter,
+    newItemId,
+    setNewItemId,
+    openSidebar,
+    setOpenSidebar,
+    activeTodoID,
+    setActiveTodoID,
+    searchText,
+    setSearchText,
+    handleCompleteCheckboxChange,
+    handleOpenSidebar,
+    getTodo,
+    handleChangeFieldTodo,
+  } = useContext(Appcontext);
 
   const FiltertodoList = useMemo(() => {
     return todoItem.filter((todo) => {
@@ -157,7 +119,7 @@ function App() {
               key={activeTodoID}
               todoItem={getTodo}
               handleCloseSidebar={() => setOpenSidebar(false)}
-              handelChangeFieldTodo={handelChangeFieldTodo}
+              handleChangeFieldTodo={handleChangeFieldTodo}
             />
           )}
         </AnimatePresence>

@@ -13,7 +13,7 @@ const Sidebar = (props) => {
 
   const handleSaveToDo = () => {
     const newTodo = { ...data, name, isCompleted, isImportant, category };
-    props.handelChangeFieldTodo(newTodo);
+    props.handleChangeFieldTodo(newTodo);
     props.handleCloseSidebar();
   };
 
