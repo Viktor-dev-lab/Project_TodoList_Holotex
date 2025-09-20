@@ -2,7 +2,7 @@
   background-color: #fff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(51, 98, 170, 0.05);
   box-sizing: border-box;
 }
 
@@ -32,13 +32,28 @@
 .filter-item.selected {
   background: linear-gradient(135deg, #166fa3, #4a7ede); /* xanh lá gradient */
   color: #fff; /* chữ trắng */
-  border: 1px solid #162ba3;
-  box-shadow: 0 4px 12px rgba(22, 60, 163, 0.3);
+  border: 1px solid #566ceb;
+  box-shadow: 0 4px 12px rgba(75, 128, 207, 0.3);
   transform: translateY(-2px);
   transition: all 0.3s ease;
 }
 
 .filter-item.selected:hover {
-  box-shadow: 0 6px 16px rgba(22, 67, 163, 0.4);
+  box-shadow: 0 6px 16px rgba(96, 137, 224, 0.4);
   transform: translateY(-4px);
+}
+
+input[name="search-text"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+input[name="search-text"]:focus {
+  border-color: #4f46e5; /* xanh tím giống Tailwind indigo-600 */
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
